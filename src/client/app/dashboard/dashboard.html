@@ -1,0 +1,98 @@
+<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="today-datas">
+                        <li class="blightblue">
+                            <div class="pull-left"><i class="fa fa-plane"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">May 18 - 19, 2015</span> Castle Resort, Neverland
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                        <li class="borange">
+                            <div class="pull-left"><i class="fa fa-envelope"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.messageCount}}</span> Messages
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wviolet">
+                        <div ht-widget-header title="Record Types" allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <div class="record-types">
+                                <label class="" ng-repeat="recordName in vm.recordTypes">
+                                    {{recordName}} <input
+                                      type="checkbox"
+                                      name="selectedRecords[]"
+                                      value="{{recordName}}"
+                                      ng-checked="vm.selection.indexOf(recordName) > -1"
+                                      ng-click="toggleSelection(recordName)"
+                                      >
+                                </label>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div ht-widget-header title="Domain Names" allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <small>Enter 1 domain name per line</small>
+                            <textarea row="8" class="form-control"
+                              ng-model="vm.DomainNames"
+                              ng-list="&#10;"
+                              ng-trim="false"
+                            ></textarea>
+                             <button class="btn btn-primary" ng-click="updateTable()">Update Table</button>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget wgreen">
+                        <div ht-widget-header title="DNS Records" allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Domain</th>
+                                        <th>IP</th>
+                                        <th ng-repeat="record in vm.selection">{{record}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in vm.ProcessedDomains">
+                                        <td>{{d.name}}</td>
+                                        <td>{{d.ip}}</td>
+                                        <th ng-repeat="record in vm.selection">{{d.record}}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </section>
+</section>
